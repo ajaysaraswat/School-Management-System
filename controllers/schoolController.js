@@ -103,12 +103,10 @@ exports.listSchools = async (req, res) => {
       userLon < -180 ||
       userLon > 180
     ) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Invalid latitude or longitude provided",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Invalid latitude or longitude provided",
+      });
     }
 
     const connection = await pool.getConnection();
@@ -138,4 +136,10 @@ exports.listSchools = async (req, res) => {
     console.error("Error listing schools:", error);
     res.status(500).json({ success: false, message: "Internal server error" });
   }
+};
+
+exports.homepage = async (req, res) => {
+  res.json({
+    message: "Welcome to the school management system",
+  });
 };
